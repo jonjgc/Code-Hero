@@ -16,6 +16,7 @@ describe('CharactersListPage', () => {
     mockedApi.get.mockResolvedValue({
       data: {
         data: {
+          total: 50,
           results: [
             {
               id: 1,
