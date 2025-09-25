@@ -1,15 +1,15 @@
 import React from 'react';
+import { Character } from '../../@types/api';
 import * as S from './styles';
 
 interface CharacterCardProps {
-  name: string;
-  imageUrl: string;
+  character: Character;
 }
 
-export const CharacterCard: React.FC<CharacterCardProps> = ({
-  name,
-  imageUrl,
-}) => {
+export const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
+  const { name, thumbnail, series, events } = character;
+  const imageUrl = `${thumbnail.path}.${thumbnail.extension}`;
+
   return (
     <S.CardWrapper>
       <S.CharacterInfo>
@@ -18,13 +18,15 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
       </S.CharacterInfo>
 
       <S.Series>
-        <p>Iron Man: Armor Wars</p>
-        <p>Fantastic Four Visionaries: Walter Simonson Vol. 1</p>
+        {series.items.slice(0, 3).map((item) => (
+          <p key={item.name}>{item.name}</p>
+        ))}
       </S.Series>
 
       <S.Events>
-        <p>AvX</p>
-        <p>Demon in the Bottle</p>
+        {events.items.slice(0, 3).map((item) => (
+          <p key={item.name}>{item.name}</p>
+        ))}
       </S.Events>
     </S.CardWrapper>
   );

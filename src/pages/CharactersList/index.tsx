@@ -1,37 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CharacterCard } from '../../components/CharacterCard';
 import * as S from './styles';
+import { Character } from '../../@types/api';
+import api from '../../services/api';
 
 export const CharactersListPage: React.FC = () => {
-  const mockCharacters = [
-    {
-      name: 'Bruce Banner',
-      imageUrl:
-        'https://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0/standard_fantastic.jpg',
-    },
-    {
-      name: 'Daniel Ketch',
-      imageUrl:
-        'https://i.annihil.us/u/prod/marvel/i/mg/3/20/523215f073215/standard_fantastic.jpg',
-    },
-    {
-      name: 'Harry Osborn',
-      imageUrl:
-        'https://i.annihil.us/u/prod/marvel/i/mg/3/50/53176a6b2253e/standard_fantastic.jpg',
-    },
-  ];
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCharacters = async () => {
+      try {
+        const response = await api.get('/characters', {
+          params: {
+            limit: 10,
+          },
+        });
+        setCharacters(response.data.data.results);
+      } catch (err) {
+        console.error('Erro ao buscar personagens:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCharacters();
+  }, []);
   return (
     <S.Wrapper>
       <S.Title>Busca de personagens</S.Title>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        {mockCharacters.map((char) => (
-          <CharacterCard
-            key={char.name}
-            name={char.name}
-            imageUrl={char.imageUrl}
-          />
-        ))}
+        {isLoading ? (
+          <p>Carregando...</p>
+        ) : (
+          characters.map((char) => (
+            <CharacterCard key={char.id} character={char} />
+          ))
+        )}
       </div>
     </S.Wrapper>
   );
