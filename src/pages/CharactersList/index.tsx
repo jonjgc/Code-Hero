@@ -4,22 +4,34 @@ import * as S from './styles';
 import { Character } from '../../@types/api';
 import api from '../../services/api';
 import { Pagination } from '../../components/Pagination';
+import { SearchInput } from '../../components/SearchInput';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export const CharactersListPage: React.FC = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
-  const fetchCharacters = useCallback(async (page: number) => {
+  const fetchCharacters = useCallback(async (page: number, search: string) => {
     setIsLoading(true);
     try {
       const limit = 10;
       const offset = (page - 1) * limit;
 
-      const response = await api.get('/characters', {
-        params: { limit, offset },
-      });
+      const params: { limit: number; offset: number; nameStartsWith?: string } =
+        {
+          limit,
+          offset,
+        };
+
+      if (search) {
+        params.nameStartsWith = search;
+      }
+
+      const response = await api.get('/characters', { params });
 
       setCharacters(response.data.data.results);
       setTotalPages(Math.ceil(response.data.data.total / limit));
@@ -31,13 +43,22 @@ export const CharactersListPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    fetchCharacters(currentPage);
-  }, [currentPage, fetchCharacters]);
+    fetchCharacters(currentPage, debouncedSearchTerm);
+  }, [currentPage, debouncedSearchTerm, fetchCharacters]);
+
+  useEffect(() => {
+    if (debouncedSearchTerm && currentPage !== 1) {
+      setCurrentPage(1);
+    }
+  }, [currentPage, debouncedSearchTerm]);
 
   return (
     <S.Wrapper>
       <S.Title>Busca de personagens</S.Title>
-
+      <p style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
+        Nome do personagem
+      </p>
+      <SearchInput value={searchTerm} onChange={setSearchTerm} />
       <div
         style={{
           display: 'flex',
@@ -54,7 +75,6 @@ export const CharactersListPage: React.FC = () => {
           ))
         )}
       </div>
-
       {!isLoading && totalPages > 0 && (
         <Pagination
           currentPage={currentPage}
