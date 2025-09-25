@@ -17,6 +17,7 @@
     "crypto-js": "^4.2.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.2",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.19",
     "styled-icons": "^10.47.1",
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
+    "@types/react-router-dom": "^5.3.3",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "prettier": "^3.6.2"
