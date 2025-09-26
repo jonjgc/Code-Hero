@@ -1,46 +1,68 @@
-# Getting Started with Create React App
+# Code Hero
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A aplicação é uma interface responsiva que consome a API da Marvel para listar, buscar e exibir detalhes de personagens.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+* **Listagem de Personagens**: Exibe uma lista paginada de personagens da Marvel.
+* **Busca Dinâmica**: Filtragem de personagens por nome.
+* **Paginação Completa**: Navegação entre páginas, incluindo botões para ir ao início e ao fim da lista.
+* **Página de Detalhes**: Visualização de informações detalhadas de cada personagem, incluindo uma lista de quadrinhos em que participou.
+* **Troca de Tema**: Suporte para temas Light e Dark.
+* **Design Responsivo**: Interface adaptada para visualização em desktops e dispositivos móveis.
 
-### `npm start`
+## Tecnologias Utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* **React com TypeScript:** A versão do React utilizada foi a 19.1.13.
+* **Styled Components**: Para estilização de componentes.
+* **React Router Dom**: Para gerenciamento de rotas.
+* **Jest & React Testing Library**: Para testes unitários e de integração.
+* **ESLint & Prettier**: Para padronização do código.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Como Executar o Projeto
 
-### `npm test`
+Siga os passos abaixo para executar o projeto localmente.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Pré-requisitos
 
-### `npm run build`
+* [Node.js](https://nodejs.org/en/) (versão 16 ou superior)
+* [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
+* Chaves da API da Marvel, que podem ser obtidas em [developer.marvel.com](https://developer.marvel.com/).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Instalação
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/jonjgc/code-hero.git
+    cd code-hero
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2.  **Crie o arquivo de variáveis de ambiente:**
+    Na raiz do projeto, crie um arquivo chamado `.env` e adicione suas chaves da Marvel, como no exemplo abaixo:
+    ```
+    REACT_APP_MARVEL_PUBLIC_KEY=SUA_CHAVE_PUBLICA_AQUI
+    REACT_APP_MARVEL_PRIVATE_KEY=SUA_CHAVE_PRIVADA_AQUI
+    REACT_APP_MARVEL_API_BASE_URL=[https://gateway.marvel.com/v1/public](https://gateway.marvel.com/v1/public)
+    ```
 
-### `npm run eject`
+3.  **Instale as dependências e inicie a aplicação:**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    ```bash
+    # 1. Instala as dependências
+    npm install
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    # 2. Inicia o servidor de desenvolvimento
+    npm start
+    ```
+    A aplicação estará disponível em `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Rodando os Testes
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Para executar os testes automatizados, rode o comando:
+```bash
+npm test
+```
 
-## Learn More
+### Importante
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+O teste pede para restringir o uso de bibliotecas de terceiros. No entanto, para navegação em uma Single Page Application (SPA) como este projeto, uma biblioteca de roteamento como a react-router-dom é considerada uma ferramenta fundamental e padrão da indústria.
