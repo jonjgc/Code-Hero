@@ -3,10 +3,15 @@ import { render, screen } from '@testing-library/react';
 import { AppThemeProvider } from '../../contexts/ThemeContext';
 import { CharactersListPage } from '.';
 import api from '../../services/api';
+import { MemoryRouter } from 'react-router-dom';
 jest.mock('../../services/api');
 
 const renderWithTheme = (component: React.ReactNode) => {
-  return render(<AppThemeProvider>{component}</AppThemeProvider>);
+  return render(
+    <MemoryRouter>
+      <AppThemeProvider>{component}</AppThemeProvider>
+    </MemoryRouter>,
+  );
 };
 
 const mockedApi = api as jest.Mocked<typeof api>;
