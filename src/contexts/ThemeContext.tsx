@@ -10,6 +10,12 @@ import { lightTheme, darkTheme } from '../styles/themes';
 import { GlobalStyles } from '../styles/GlobalStyles';
 
 interface ThemeContextData {
+  theme: string;
+  toggleTheme: () => void;
+}
+
+interface ThemeContextData {
+  theme: string;
   toggleTheme: () => void;
 }
 
@@ -30,7 +36,7 @@ export const AppThemeProvider: React.FC<{ children: ReactNode }> = ({
   );
 
   return (
-    <ThemeContext.Provider value={{ toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <StyledThemeProvider theme={currentTheme}>
         <GlobalStyles />
         {children}
