@@ -33,15 +33,17 @@ export const Pagination: React.FC<PaginationProps> = ({
         &lt;
       </S.PageButton>
 
-      {pages.map((page) => (
-        <S.PageButton
-          key={page}
-          $isActive={page === currentPage}
-          onClick={() => onPageChange(page)}
-        >
-          {page}
-        </S.PageButton>
-      ))}
+      <S.PageNumbersWrapper>
+        {pages.map((page) => (
+          <S.PageButton
+            key={page}
+            $isActive={page === currentPage}
+            onClick={() => onPageChange(page)}
+          >
+            {page}
+          </S.PageButton>
+        ))}
+      </S.PageNumbersWrapper>
 
       <S.PageButton
         onClick={() => onPageChange(currentPage + 1)}

@@ -32,3 +32,12 @@ export const PageButton = styled.button<PageButtonProps>`
     opacity: 0.5;
   }
 `;
+
+export const PageNumbersWrapper = styled.div`
+  display: flex;
+  gap: 0.5rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
