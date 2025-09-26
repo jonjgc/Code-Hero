@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 400px;
-  margin: 0 auto 2rem auto;
+  margin: 0 0 2rem 0;
 `;
 
 export const Input = styled.input`

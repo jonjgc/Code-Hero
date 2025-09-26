@@ -55,10 +55,13 @@ export const CharactersListPage: React.FC = () => {
   return (
     <S.Wrapper>
       <S.Title>Busca de personagens</S.Title>
-      <p style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
-        Nome do personagem
-      </p>
-      <SearchInput value={searchTerm} onChange={setSearchTerm} />
+      <S.SearchLabel htmlFor="search">Nome do personagem</S.SearchLabel>
+      <SearchInput id="search" value={searchTerm} onChange={setSearchTerm} />
+      <S.ListHeader>
+        <p>Personagem</p>
+        <p>Séries</p>
+        <p>Eventos</p>
+      </S.ListHeader>
       <div
         style={{
           display: 'flex',
@@ -68,14 +71,20 @@ export const CharactersListPage: React.FC = () => {
         }}
       >
         {isLoading ? (
-          <p>Carregando...</p>
-        ) : (
+          <S.NotFoundContainer>
+            <p>Carregando...</p>
+          </S.NotFoundContainer>
+        ) : characters.length > 0 ? (
           characters.map((char) => (
             <CharacterCard key={char.id} character={char} />
           ))
+        ) : (
+          <S.NotFoundContainer>
+            <p>Nenhum personagem encontrado.</p>
+          </S.NotFoundContainer>
         )}
       </div>
-      {!isLoading && totalPages > 0 && (
+      {!isLoading && characters.length > 0 && totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

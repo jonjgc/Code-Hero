@@ -36,11 +36,19 @@ export const CharacterDetailPage: React.FC = () => {
   }, [characterId]);
 
   if (isLoading) {
-    return <p>Carregando...</p>;
+    return (
+      <S.StatusContainer>
+        <p>Carregando...</p>
+      </S.StatusContainer>
+    );
   }
 
   if (!character) {
-    return <p>Personagem não encontrado.</p>;
+    return (
+      <S.StatusContainer>
+        <p>Personagem não encontrado.</p>
+      </S.StatusContainer>
+    );
   }
 
   return (
