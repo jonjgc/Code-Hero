@@ -60,7 +60,7 @@ Siga os passos abaixo para executar o projeto localmente.
 
 Para executar os testes automatizados, rode o comando:
 ```bash
-npm test
+npm run test:all
 ```
 
 ### Importante
